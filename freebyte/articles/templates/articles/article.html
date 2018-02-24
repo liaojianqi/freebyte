@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block head %}
+  <link href="{% static 'css/articles.css' %}" rel="stylesheet">
+  <script src="{% static 'js/articles.js' %}"></script>
+{% endblock head %}
+
+{% block main %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'articles' %}">文章</a></li>
+    <li class="active">文章</li>
+  </ol>
+  {% if article.create_user == request.user %}
+    <div>
+      <a href="{% url 'edit_article' article.pk %}" class="btn btn-primary pull-right">
+        <span class="glyphicon glyphicon-pencil"></span> 修改文章
+      </a>
+    </div>
+  {% endif %}
+  {% include 'articles/partial_article.html' with article=article %}
+  {% include 'articles/partial_article_comments.html' with article=article %}
+{% endblock main %}

@@ -1,0 +1,22 @@
+{% load humanize %}
+
+<h2>问答</h2>
+{% if results %}
+  <ul class="questions-results">
+    {% for question in results %}
+      <li question-id="{{ question.pk }}">
+        <h5>
+          <img src="{{ question.user.profile.get_picture }}" class="result-user">
+          <a href="{% url 'profile' question.user.username %}">
+            {{ question.user.profile.get_screen_name }}
+          </a>
+          <small>提问于 {{ question.create_date|date:'y-m-d H:i' }}</small>
+        </h5>
+        <h4><a href="{% url 'question' question.pk %}">{{ question.title }}</a></h4>
+        <div class="question-description">{{ question.get_description_preview_as_markdown|safe }}</div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h4 class="no-result">没有找到结果</h4>
+{% endif %}

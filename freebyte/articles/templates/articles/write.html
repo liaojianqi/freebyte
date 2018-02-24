@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+  <script src="{% static 'js/articles.js' %}"></script>
+{% endblock head %}
+
+{% block main %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'articles' %}">文章</a></li>
+    <li class="active">写文章</li>
+  </ol>
+  <form action="{% url 'write' %}" id="article-form" method="post" role="form">
+    {% csrf_token %}
+    {{ form.status }}
+    {% for field in form.visible_fields %}
+      <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+        {% if field.label == 'Content' %}
+          {% include 'markdown_editor.html' with textarea='id_content' %}
+        {% endif %}
+        {{ field }}
+        {% if field.help_text %}
+          <span class="help-block">{{ field.help_text }}</span>
+        {% endif %}
+        {% for error in field.errors %}
+          <label class="control-label">{{ error }}</label>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    <div class="form-group">
+      <button type="button" class="btn btn-primary publish">发布</button>
+      <button type="button" class="btn btn-default draft">存为草稿</button>
+      <button type="button" class="btn btn-default preview" data-toggle="modal" data-target="#preview">预览</button>
+      <a href="{% url 'articles' %}" class="btn btn-default">取消</a>
+    </div>
+  </form>
+
+  <div class="modal fade" id="preview">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">文章预览</h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock main %}

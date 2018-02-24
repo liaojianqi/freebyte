@@ -1,0 +1,28 @@
+{% extends 'messenger/base_messages.html' %}
+
+{% block title %}私信{% endblock %}
+
+{% block page_header %}私信{% endblock %}
+
+{% block container %}
+  <div class="conversation">
+    {% if messages %}
+      {% for message in messages %}
+        {% include 'messenger/includes/partial_message.html' with message=message %}
+      {% endfor %}
+    {% else %}
+      <h4>美好缘分的开始~</h4>
+      <p>发送第一条消息吧！</p>
+    {% endif %}
+    <li class="send-message"></li>
+    <script type="text/javascript">window.onload = $('.conversation').scrollTop($('.conversation')[0].scrollHeight);</script>
+  </div>
+  <div class="chat-box">
+    <img src="{{ user.profile.get_picture }}" class="picture">
+    <form role="form" method="post" action="{% url 'send_message' %}" id="send">
+      {% csrf_token %}
+      <input type="hidden" name="to" value="{{ active }}">
+      <input class="form-control" type="text" name="message" placeholder="按Enter发送消息" maxlength="1000" autocomplete="off">
+    </form>
+  </div>
+{% endblock container %}

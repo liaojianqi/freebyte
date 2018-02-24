@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+  <script src="{% static 'js/articles.js' %}"></script>
+{% endblock head %}
+
+{% block main %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'articles' %}">文章</a></li>
+    <li><a href="{% url 'drafts' %}">草稿</a></li>
+    <li class="active">修改</li>
+  </ol>
+  <form action="{% url 'edit_article' form.instance.pk %}" id="article-form" method="post" role="form">
+    {% csrf_token %}
+    {{ form.status }}
+    {% for field in form.visible_fields %}
+      <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+        {% if field.label == '内容' %}
+          {% include 'markdown_editor.html' with textarea='id_content' %}
+        {% endif %}
+        {% if field.label != '标签' %}
+          {{ field }}
+        {% endif %}
+        {% if field.label == '标签' %}
+          <input type="text" name="tags" value="" required id="id_tags" />
+        {% endif %}
+        {% if field.help_text %}
+          <span class="help-block">{{ field.help_text }}</span>
+        {% endif %}
+        {% for error in field.errors %}
+          <label class="control-label">{{ error }}</label>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    <div class="form-group">
+      <button type="button" class="btn btn-primary publish">发布</button>
+      <button type="button" class="btn btn-default draft">存为草稿</button>
+      <a href="{% url 'drafts' %}" class="btn btn-default">取消</a>
+    </div>
+  </form>
+{% endblock main %}

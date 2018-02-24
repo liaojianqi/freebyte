@@ -1,0 +1,6 @@
+{% load i18n %}
+<div class="list-group">
+  <a href="{% url 'settings' %}" class="list-group-item{% if active == 'profile' %} active{% endif %}">基本资料</a>
+  <a href="{% url 'picture' %}" class="list-group-item{% if active == 'picture' %} active{% endif %}">头像</a>
+  <a href="{% url 'password' %}" class="list-group-item{% if active == 'password' %} active{% endif %}">密码</a>
+</div>
