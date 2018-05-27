@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-python manage.py runserver
+nohup python manage.py runworker &
+nohup python manage.py runworker &
+nohup python manage.py runworker &
+nohup python manage.py runworker &
+nohup daphne freebyte.asgi:channel_layer &

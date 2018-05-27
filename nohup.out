@@ -6,3 +6,15 @@
 [2018-05-25 18:04:48 +0800] [11713] [INFO] Listening at: unix:/tmp/freebyte.sock (11713)
 [2018-05-25 18:04:48 +0800] [11713] [INFO] Using worker: sync
 [2018-05-25 18:04:48 +0800] [11724] [INFO] Booting worker with pid: 11724
+2018-05-27 17:20:51,620 - INFO - runworker - Using single-threaded worker.
+2018-05-27 17:20:51,626 - INFO - runworker - Running worker against channel layer default (asgi_redis.core.RedisChannelLayer)
+2018-05-27 17:20:51,626 - INFO - worker - Listening on channels http.request, websocket.connect, websocket.disconnect, websocket.receive
+2018-05-27 17:20:52,580 - INFO - runworker - Using single-threaded worker.
+2018-05-27 17:20:52,580 - INFO - runworker - Running worker against channel layer default (asgi_redis.core.RedisChannelLayer)
+2018-05-27 17:20:52,581 - INFO - worker - Listening on channels http.request, websocket.connect, websocket.disconnect, websocket.receive
+2018-05-27 17:20:53,349 - INFO - runworker - Using single-threaded worker.
+2018-05-27 17:20:53,349 - INFO - runworker - Running worker against channel layer default (asgi_redis.core.RedisChannelLayer)
+2018-05-27 17:20:53,349 - INFO - worker - Listening on channels http.request, websocket.connect, websocket.disconnect, websocket.receive
+2018-05-27 17:20:54,221 - INFO - runworker - Using single-threaded worker.
+2018-05-27 17:20:54,221 - INFO - runworker - Running worker against channel layer default (asgi_redis.core.RedisChannelLayer)
+2018-05-27 17:20:54,221 - INFO - worker - Listening on channels http.request, websocket.connect, websocket.disconnect, websocket.receive
